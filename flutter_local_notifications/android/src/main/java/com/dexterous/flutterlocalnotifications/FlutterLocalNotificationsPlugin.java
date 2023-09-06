@@ -38,6 +38,7 @@ import android.util.Log;
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.car.app.notification.CarAppExtender;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.AlarmManagerCompat;
 import androidx.core.app.NotificationCompat;
@@ -427,6 +428,8 @@ public class FlutterLocalNotificationsPlugin
     setProgress(notificationDetails, builder);
     setCategory(notificationDetails, builder);
     setTimeoutAfter(notificationDetails, builder);
+    builder.extend( new CarAppExtender.Builder()
+            .setContentTitle(notificationDetails.title).build());
     Notification notification = builder.build();
     if (notificationDetails.additionalFlags != null
         && notificationDetails.additionalFlags.length > 0) {
