@@ -12,6 +12,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -429,7 +430,7 @@ public class FlutterLocalNotificationsPlugin
     setProgress(notificationDetails, builder);
     setCategory(notificationDetails, builder);
     setTimeoutAfter(notificationDetails, builder);
-    setShowInAndroidAuto(notificationDetails, builder);
+    setShowInAndroidAuto(context,notificationDetails, builder);
 
     Notification notification = builder.build();
     if (notificationDetails.additionalFlags != null
@@ -441,9 +442,17 @@ public class FlutterLocalNotificationsPlugin
     return notification;
   }
 
-  private static void setShowInAndroidAuto(NotificationDetails notificationDetails, NotificationCompat.Builder builder) {
-    if (notificationDetails.showAndroidAuto) {
-      builder.extend(new CarAppExtender.Builder().build());
+  private static void setShowInAndroidAuto(Context context, NotificationDetails notificationDetails, NotificationCompat.Builder builder) {
+    if (notificationDetails.showInAndroidAuto) {
+      CarAppExtender.Builder extendedBuilder = new CarAppExtender.Builder();
+      if (!notificationDetails.androidAutoLaunchIntent.equals("")) {
+        extendedBuilder.setContentIntent(CarPendingIntent.getCarApp(context, 0,
+                new Intent(Intent.ACTION_MAIN).setComponent(
+                        new ComponentName(context, notificationDetails.androidAutoLaunchIntent)), 0)
+        );
+      }
+
+      builder.extend(extendedBuilder.build());
     }
   }
 

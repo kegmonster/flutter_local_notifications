@@ -223,6 +223,7 @@ extension AndroidNotificationDetailsMapper on AndroidNotificationDetails {
         'number': number,
         'audioAttributesUsage': audioAttributesUsage.value,
         'showInAndroidAuto': showInAndroidAuto,
+        'androidAutoLaunchIntent': androidAutoLaunchIntent
       }
         ..addAll(_convertActionsToMap(actions))
         ..addAll(_convertStyleInformationToMap())
