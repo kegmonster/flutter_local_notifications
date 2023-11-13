@@ -1080,7 +1080,8 @@ class _HomePageState extends State<HomePage> {
             channelDescription: 'your channel description',
             importance: Importance.max,
             priority: Priority.high,
-            ticker: 'ticker');
+            ticker: 'ticker',
+        showInAndroidAuto: true);
     const NotificationDetails notificationDetails =
         NotificationDetails(android: androidNotificationDetails);
     await flutterLocalNotificationsPlugin.show(

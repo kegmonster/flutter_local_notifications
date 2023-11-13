@@ -220,6 +220,7 @@ extension AndroidNotificationDetailsMapper on AndroidNotificationDetails {
         'colorized': colorized,
         'number': number,
         'audioAttributesUsage': audioAttributesUsage.value,
+        'showInAndroidAuto': showInAndroidAuto,
       }
         ..addAll(_convertActionsToMap(actions))
         ..addAll(_convertStyleInformationToMap())
