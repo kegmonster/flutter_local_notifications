@@ -39,6 +39,7 @@ import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.notification.CarAppExtender;
+import androidx.car.app.notification.CarPendingIntent;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.AlarmManagerCompat;
 import androidx.core.app.NotificationCompat;
@@ -428,8 +429,8 @@ public class FlutterLocalNotificationsPlugin
     setProgress(notificationDetails, builder);
     setCategory(notificationDetails, builder);
     setTimeoutAfter(notificationDetails, builder);
-    builder.extend( new CarAppExtender.Builder()
-            .setContentTitle(notificationDetails.title).build());
+    setShowInAndroidAuto(notificationDetails, builder);
+
     Notification notification = builder.build();
     if (notificationDetails.additionalFlags != null
         && notificationDetails.additionalFlags.length > 0) {
@@ -438,6 +439,12 @@ public class FlutterLocalNotificationsPlugin
       }
     }
     return notification;
+  }
+
+  private static void setShowInAndroidAuto(NotificationDetails notificationDetails, NotificationCompat.Builder builder) {
+    if (notificationDetails.showAndroidAuto) {
+      builder.extend(new CarAppExtender.Builder().build());
+    }
   }
 
   private static Boolean canCreateNotificationChannel(

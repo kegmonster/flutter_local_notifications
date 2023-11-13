@@ -127,6 +127,7 @@ public class NotificationDetails implements Serializable {
   private static final String COLORIZED = "colorized";
   private static final String NUMBER = "number";
   private static final String AUDIO_ATTRIBUTES_USAGE = "audioAttributesUsage";
+  private static final String SHOW_ANDROID_AUTO = "showInAndroidAuto";
 
   public Integer id;
   public String title;
@@ -196,6 +197,7 @@ public class NotificationDetails implements Serializable {
   public Boolean colorized;
   public Integer number;
   public Integer audioAttributesUsage;
+  public Boolean showAndroidAuto;
 
   // Note: this is set on the Android to save details about the icon that should be used when
   // re-hydrating scheduled notifications when a device has been restarted.
@@ -309,6 +311,8 @@ public class NotificationDetails implements Serializable {
           }
         }
       }
+
+      notificationDetails.showAndroidAuto = (Boolean) platformChannelSpecifics.get(SHOW_ANDROID_AUTO);
     }
   }
 
