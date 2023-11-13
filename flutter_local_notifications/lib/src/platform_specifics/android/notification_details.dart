@@ -146,6 +146,7 @@ class AndroidNotificationDetails {
     this.number,
     this.audioAttributesUsage = AudioAttributesUsage.notification,
     this.showInAndroidAuto = false,
+        this.androidAutoLaunchIntent = ''
   });
 
   /// The icon that should be used when displaying the notification.
@@ -406,4 +407,6 @@ class AndroidNotificationDetails {
   final AudioAttributesUsage audioAttributesUsage;
 
   final bool showInAndroidAuto;
+
+  final String androidAutoLaunchIntent;
 }
